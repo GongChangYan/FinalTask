@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title> 司法搜索 </title>
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1309180_m0vigzfu7y.css">
+    <script type="text/javascript">
+ 
+        function display(id){  
+            var traget=document.getElementById(id);  
+            if(traget.style.display=="none"){  
+                traget.style.display="";  
+            }else{  
+                traget.style.display="none";  
+          }
+       }  
+    </script>
+    <style type="text/css">
+        .bod1
+        {
+            /*background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);*/
+            /*background-image: url(" 2558.jpg");*/
+            /*background-size:cover;*/
+            background: white;  /* fallback for old browsers */
+        }
+        .search-btn
+        {
+            background: url('https://cdn.icon-icons.com/icons2/2065/PNG/512/search_icon_124868.png');
+            background-size: 40px 40px;
+            background-repeat: no-repeat;
+            background-position-x: 5px;
+            background-position-y: 5px;
+            border-color: transparent;
+            float: left;
+            left: 20px;
+            display: block;
+            width: 50px;
+            height: 50px;
+            top: 50%;
+            position: relative;
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+            transition: 0.5s;
+        }
+        .search-logo
+        {
+            float: left;
+            background: url(https://photo.16pic.com/00/26/28/16pic_2628498_b.jpg);
+            background-size: 60px 60px;
+            background-repeat: no-repeat;
+            width: 60px;
+            height: 60px;
+        }
+        .search-text
+        {
+            border-radius: 30px; /*圆角边框*/
+            box-shadow: 8px 6px 5px #888888;
+            background: white;
+            outline: none;
+            display: block;
+            float: left;
+            left: 20px;
+            top: 50%;
+            padding: 0;
+            padding-left: 5px;
+            color: black;
+            font-size: 20px;
+            font-family: "Microsoft YaHei UI Light";
+            transition: 0.5s;
+            line-height:40px;
+            width: 600px;
+            height: 40px;
+            position: relative;
+        }
+        .tagbox-up-searh
+        {
+            /* float: left; */
+            background-color: transparent;
+            display: flex;
+            position: relative;
+            left: 100px;
+            top: 40px;
+        }
+        .tag-up-search
+        {
+            /* float: left; */
+            background-color: transparent;
+            width: 100px;
+            height: 40px;
+            top: 100%;
+            position: relative;
+            list-style-type: none;
+        }
+        .tag-a
+        {
+            text-decoration: none;
+        }
+        .advance-search-btn
+        {
+            left: 100px;
+            top: 20px;
+            font-family: "Microsoft KaiTi UI Light";
+            font-size: large;
+            display: flex;
+            position: relative;
+            border-style: solid;
+            border-radius: 20%;
+            background-color: white;
+
+        }
+        .advance-search-selcet
+        {
+            left: 100px;
+            top: 20px;
+            position: relative;
+            border-style: solid;
+            border-radius: 0%;
+            border:#888888;
+            background-color: white;
+            width: 600px;
+            height: 200px;
+        }
+        .div-result {
+            width: 700px;   
+            margin: 10px;
+            position: relative;
+        }
+        .ol-result {
+            list-style-type: none; 
+        }
+        .li-result {
+            position: relative;   
+            font: bold italic 45px/1.5 Helvetica, Verdana, sans-serif;   
+            margin-bottom: 20px; 
+        }
+        .p-result {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        .num-time {
+            position: relative;   
+            font-size: 10pt;  
+            left: 80px;
+            top: 20px;
+        }
+ 
+    </style>
+</head>
+<body class="bod1">
+<div id="search-head" style="display: block;">
+    <div>
+        <ul class="tagbox-up-searh">
+            <li class="tag-up-search">
+                <a class="tag-a" href="/search/?category=刑事案件">刑事案件</a>
+            </li>
+            <li class="tag-up-search">
+                <a class="tag-a" href="/search/?category=民事案件">民事案件</a>
+            </li>
+            <li class="tag-up-search">
+                <a class="tag-a" href="/search/?category=行政案件">行政案件</a>
+            </li>
+            <li class="tag-up-search">
+                <a class="tag-a" href="/search/?category=赔偿案件">赔偿案件</a>
+            </li>
+            <li class="tag-up-search">
+                <a class="tag-a" href="/search/?category=执行案件">执行案件</a>
+            </li>
+        </ul>
+    </div>
+    <form action="/search/" method="get">
+        <div style="display: flex; height: 60px;">
+            <p class="search-logo"></p>
+            <input class="search-text" type="text" name="q" value= {{ question }} >
+            <input id="search-button" class="search-btn" type="submit" value="">
+        </div>
+    </form>
+    <div>
+        <!-- 全文，当事人，案件类别，标准法院名称，法律法条，文尾 -->
+        <input class="advance-search-btn" type="submit" value="高级搜索" onclick="display('search-list'); display('search-button')">
+        <div id="search-list" style="display:none">
+            <form class="advance-search-selcet" action="/search/" method="get">
+                <div style="display: flex; position: relative; top: 5px;">
+                <div style=" position: relative; ">
+                    <span>文书关键词</span>
+                    <div >
+                        <input  style="width: 200px;"type="text" name="q" value= {{ question }} >
+                    </div>
+                </div>
+                <div style=" position: relative; left: 100px;">
+                    <span>案件当事人</span>
+                    <div>
+                        <input style="width: 200px;" type="text" name="character" value={{ character }}>
+                    </div>
+                </div>
+                </div>
+                <div style="display: flex; position: relative; top: 5px;">
+                <div style=" position: relative; ">
+                    <span>案件类别</span>
+                    <div>
+                        <input style="width: 200px;" type="text" name="category" value={{ category }}>
+                    </div>
+                </div>
+                <div style=" position: relative; left: 100px;">
+                    <span>法院名称</span>
+                    <div>
+                        <input style="width: 200px;" type="text" name="court" value={{ court }} >
+                    </div>
+                </div>
+                </div>
+                <div style="display: flex; position: relative; top: 5px;">
+                <div style=" position: relative;">
+                    <span>法律条文</span>
+                    <div>
+                        <input style="width: 200px;" type="text" name="law" value={{ law }} >
+                    </div>
+                </div>
+                <div style=" position: relative; left: 100px;">
+                    <span>法官</span>
+                    <div>
+                        <input style="width: 200px;" type="text" name="judge" value={{ judge }}>
+                    </div>
+                </div>
+                </div>
+                <div style="position: relative; left: 250px; top: 30px;">
+                    <input type="submit" value="搜索">
+                </div>
+            </form>
+        </div> 
+    </div>
+    <p class="num-time">得到{{ num }}个结果，耗时{{ time }}s</p>
+<div id="search-results" style="display: flex;">
+    <div class="div-result">
+        <ol class="ol-result">
+            {% for i in results %}
+            <li>
+                <a class="a-results" href={{ i.url }}>{{ i.文首 }}</a>
+                <p class="p-result"> {{ i.全文 }}</p>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+</div>
+</div>
+<div id="search-tail" class="tail">
+    <div class="pages" style="position: relative; left: 100px;">
+        <div style="display: flex; flex-wrap:wrap; justify-content:space-evenly; width: 500px; height: 50px;">
+            {% for i in pages %}
+            <a style="text-decoration: none; flex:0 0 10%;" href={{i.url}}>{{i.p}}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

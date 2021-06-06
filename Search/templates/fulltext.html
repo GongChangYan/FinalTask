@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title> 文书全文 </title>
+    <style>
+        .ol-result {
+            list-style-type: none; 
+        }
+        .li-result {
+            position: relative;   
+            font: bold italic 45px/1.5 Helvetica, Verdana, sans-serif;   
+            margin-bottom: 20px; 
+        }
+        .p-result {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+    </style>
+</head>
+<body>
+    <div><a href="/">司法搜索</a></div>
+    <div class="pdf-box">
+        <div class="pdf-title" style="TEXT-ALIGN: center; LINE-HEIGHT: 30pt; MARGIN: 10px 0px; FONT-FAMILY: 黑体; FONT-SIZE: 18pt;">
+            {{results.文首}}
+        </div>
+        <div class="pdf-info" style="TEXT-ALIGN: center; FONT-SIZE: 14pt;">
+            <div class="info">
+            <a href={{ results.标准法院名称.url }}>
+                法院:{{results.标准法院名称.text}}
+            </a>
+            </div>
+            <div class="info" >
+            <a href={{ results.案件类别.url }}>
+                案件类别:{{results.案件类别.text}}
+            </a>
+            </div>
+            <div class="info">
+                文书种类:{{results.文书种类}}
+            </div>
+        </div>
+        <div class="pdf-text">
+            <p>{{results.当事人}}</p>
+            <p>{{results.案件基本情况}}</p>
+            <p>{{results.裁判分析过程}}</p>
+            <p>{{results.判决结果}}</p>
+            {% for i in results.文尾 %}
+            <p><a href={{ i.url }}>{{i.text}}</a></p>
+            {% endfor %}
+            {% for i in results.法律法条 %}
+            <p><a href={{ i.url }}>{{i.text}}</a></p>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="similars">
+        <div class="div-result">
+            <p>相似案件：</p>
+            <ol class="ol-result">
+                {% for i in SimilarCase %}
+                <li>
+                    <a class="a-results" href={{ i.url }}>{{ i.文首 }}</a>
+                    <p class="p-result"> {{ i.全文 }}</p>
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+        <div class="div-result">
+            <p>相似法条：</p>
+            <ol class="ol-result">
+                {% for i in SimilarLaws %}
+                <li>
+                    <a class="a-results" href={{ i.url }}>{{ i.文首 }}</a>
+                    <p class="p-result"> {{ i.全文 }}</p>
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+</body>
